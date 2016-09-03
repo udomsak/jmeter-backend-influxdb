@@ -39,3 +39,6 @@ Jmeter Backend Listener with InfluxDB
 # หมายเหตุ 
 
 - ผมไม่ใช่ โปรแกรมเมอร์  นี่เป็นการเขียนโดยแกะเอาจาก งานของคนอื่นมาเป็นแบบ แล้ว นำมาปรับปรุงเอาเอง
+
+# CopyRight and License
+- MIT License
