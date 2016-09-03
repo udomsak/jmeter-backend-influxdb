@@ -1,7 +1,7 @@
 # jmeter-backend-influxdb
 Jmeter Backend Listener with InfluxDB 
 
-- English version cllick here 
+- [English version cllick here](https://github.com/udomsak/jmeter-backend-influxdb/blob/master/README-EN.md)  
 
 # Jmeter Backend InfluxDB 
 
