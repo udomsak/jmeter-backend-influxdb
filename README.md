@@ -7,6 +7,8 @@ Jmeter Backend Listener with InfluxDB
 
 เป็น Jmeter Backend Listener plugin สามารถ ส่งค่า metric ซึ่งเป็น Jmeter statistic ตรงไปยัง InfluxDB โดยตรงได้เลย ซึ่งสะดวกต่อการ monitor และ การจัดเก็บ  ผลของการทดสอบ Load-test ไว้ดูทีหลังได้ 
 
+![alt tag](https://github.com/udomsak/jmeter-backend-influxdb/blob/master/misc/result_on_influxdb.jpg)
+
 ## ค่าที่ส่งเข้าไป 
 
 - body_size	
