@@ -1,0 +1,93 @@
+package unixdev.jmeter.listeners;
+
+import java.util.List;
+
+import org.apache.jmeter.config.Arguments;
+import org.apache.jmeter.samplers.SampleResult;
+import org.apache.jmeter.visualizers.backend.AbstractBackendListenerClient;
+import org.apache.jmeter.visualizers.backend.BackendListenerContext;
+
+import org.apache.jorphan.logging.LoggingManager;
+import org.apache.log.Logger;
+
+import org.influxdb.InfluxDB.LogLevel;
+import org.influxdb.dto.BatchPoints;
+import org.influxdb.dto.Point;
+import org.influxdb.dto.Pong;
+import org.influxdb.dto.Query;
+import org.influxdb.dto.QueryResult;
+import org.influxdb.InfluxDBFactory;
+import org.influxdb.InfluxDB;
+
+
+
+
+public class InfluxdbListener extends AbstractBackendListenerClient{
+
+    private static final String PARAMETER_NAME_INFLUXDB_PROTOCOL = "elasticsearch.protocol";
+    private static final String PARAMETER_NAME_INFLUXDB_HOST = "influxdb.host";
+    private static final String PARAMETER_NAME_INFLUXDB_PORT = "influxdb.port";
+    private static final String PARAMETER_NAME_INFLUXDB_USER = "influxdb.user";
+    private static final String PARAMETER_NAME_INFLUXDB_PASSWORD = "influxdb.password";
+    private static final String PARAMETER_NAME_INFLUXDB_MEASUREMENT  = "influxdb.measurement";
+    private static final String PARAMETER_NAME_INFLUXDB_TAG = "influxdb.tag"; 
+
+	private static final Logger LOGGER = LoggingManager.getLoggerForClass();
+
+	private static final Object LOCK = new Object();
+
+	private boolean isInfluxDBServerPingOk;
+	
+	private InfluxDB influxDB;
+	
+    @Override
+	public Arguments getDefaultParameters(){
+        Arguments parameters = new Arguments();
+        
+        parameters.addArgument(PARAMETER_NAME_INFLUXDB_PROTOCOL, "http");
+        parameters.addArgument(PARAMETER_NAME_INFLUXDB_HOST, null);
+        parameters.addArgument(PARAMETER_NAME_INFLUXDB_PORT, "9200");
+        parameters.addArgument(PARAMETER_NAME_INFLUXDB_USER, null);
+        parameters.addArgument(PARAMETER_NAME_INFLUXDB_PASSWORD, null);
+        parameters.addArgument(PARAMETER_NAME_INFLUXDB_MEASUREMENT, "http");
+        parameters.addArgument(PARAMETER_NAME_INFLUXDB_TAG, null);
+        return parameters;
+
+    }
+    @Override
+	public void setupTest(BackendListenerContext context) throws Exception {
+    	this.influxDB = InfluxDBFactory.connect("http://" + PARAMETER_NAME_INFLUXDB_HOST + ":" + PARAMETER_NAME_INFLUXDB_PORT, PARAMETER_NAME_INFLUXDB_USER, PARAMETER_NAME_INFLUXDB_PASSWORD);
+    	
+    	boolean influxDBstarted = false;
+    	
+		do {
+			Pong response;
+			try {
+				response = this.influxDB.ping();
+				LOGGER.info(response.toString());
+				if (!response.getVersion().equalsIgnoreCase("unknown")) {
+					influxDBstarted = true;
+				}
+			} catch (Exception e) {
+				// NOOP intentional
+				LOGGER.error("InfluxDB server ping test: Failed");
+				e.printStackTrace();
+			}
+			Thread.sleep(100L);
+		} while (!influxDBstarted);
+		this.influxDB.setLogLevel(LogLevel.FULL);
+    	
+    }
+    
+    @Override
+	public void teardownTest(BackendListenerContext context) throws Exception {}
+
+    
+	@Override
+	public void handleSampleResults(List<SampleResult> arg0,
+			BackendListenerContext arg1) {
+		// TODO Auto-generated method stub
+		
+	}
+
+}
