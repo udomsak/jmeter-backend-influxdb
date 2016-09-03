@@ -1,5 +1,5 @@
 # jmeter-backend-influxdb
-Jmeter Backend Listener with InfluxDB
+Simple Jmeter Backend Listener with InfluxDB
 
 ![alt tag](https://github.com/udomsak/jmeter-backend-influxdb/blob/master/misc/unixdev-logo-web-h122.png)
 
