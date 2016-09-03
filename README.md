@@ -35,7 +35,8 @@ Simple Jmeter Backend Listener with InfluxDB
 - influxdb-java client libery.
 
 # ดาวน์โหลด และ ติดตั้ง 
-- ดาวน์โหลด jmeter-influxdb-listener.jar จากนั้น นำไปวางไว้ใน Folder $JMETER/lib/ext
+- ดาวน์โหลด `file `ทั้งหมดใน folder artifact จากนั้น นำไปวางไว้ใน Folder $JMETER/lib/ext
+- ถ้า build เองจะติดปัญหาเรื่อง dependencies class ( jar file ) ** TODO 
 - เลือก Backend Listener
 
 ![alt tag](https://github.com/udomsak/jmeter-backend-influxdb/blob/master/misc/select-backend-ltn.jpg)
@@ -43,6 +44,8 @@ Simple Jmeter Backend Listener with InfluxDB
 - รัน Test 
 
 # Dependencies library 
+
+ขั้นตอนการ build  influxDB-java จะใช้ dependencies สามสี่ตัวนี้ สิ่งที่ผมทำและติดปัญหาอยู่ตอนนี้ ไม่แน่ใจว่าจะ build `ยังไงถึงจะถูกต้อง ทางแก้ของผมตอนนี้ คือทำการ copy jar file ข้างล่างนี้ไป folder lib/ext `ทั้งหมด  
 
 - guava-18.0.jar 
 - okhttp-2.7.5.jar
@@ -55,5 +58,7 @@ Simple Jmeter Backend Listener with InfluxDB
 
 - ผมไม่ใช่ โปรแกรมเมอร์  นี่เป็นการเขียนโดยแกะเอาจาก งานของคนอื่นมาเป็นแบบ แล้ว นำมาปรับปรุงเอาเอง
 - please help to contribute. :) 
+
+
 # CopyRight and License
 - MIT License
