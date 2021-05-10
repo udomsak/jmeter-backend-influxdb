@@ -1,3 +1,6 @@
+# NOTE.
+This project i use some code from someone on the internet (forgot about link refer sorry). i not wrote all by my self. 
+
 # jmeter-backend-influxdb
 Simple Jmeter Backend Listener with InfluxDB
 
